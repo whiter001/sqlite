@@ -12,6 +12,7 @@ For more information and examples, please refer to the User's Guide in the Docum
 ## Summary
 Below is a summary of SQLite PowerShell Provider operations:
 
+```powershell
 PS> import-module SQLite
 PS> new-psdrive -name db -psp SQLite -root "Data Source=data.sqlite"
 
@@ -100,8 +101,8 @@ User2        2
 # ...
 User200      200
 
-
 PS> ls db:/MyTable -filter "username='beef'" | select username, id
+
 
 username     id
 --------     --
@@ -114,3 +115,4 @@ PS> ls db:/MyTable -filter "id=1" | select username, id
 username     id
 --------     --
 jimbo        1
+```
