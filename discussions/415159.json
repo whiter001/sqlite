@@ -1,0 +1,58 @@
+[
+  {
+    "Id": "967153",
+    "ThreadId": "415159",
+    "Html": "\r\n<p>I have a database file that was created with System.Data.SQLite version 1.0.82 and I'm trying to inspect it with the Powershell provider. I can create the drive and view the schema info (ie dir db:), but if I query table rows (ie dir db:/TableName)&nbsp;I\r\n get no output.</p>\r\n<p>I notice that the embedded SQLite binaries in the module are an older version, could that be the problem?</p>\r\n",
+    "PostedDate": "2012-12-21T09:55:26.703-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "981453",
+    "ThreadId": "415159",
+    "Html": "\r\n<p>That could very well be the issue. &nbsp;You can try replacing the sqlite binaries in the module folder with the newer version.</p>\r\n<p>SQLite is also sensitive to 32/64-bit environments; if the database was created using the 64-bit version of sqlite, and you're using the 32-bit version, it tends to fail.</p>\r\n<p>One thing that may be helpful: set the value of $verbosepreference to 'continue' before attempting to read data from the table. &nbsp;This will drop verbose messages to the console during the read, including things like the sql being passed to the SQLite provider.</p>\r\n",
+    "PostedDate": "2012-12-28T13:25:48.833-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "983177",
+    "ThreadId": "415159",
+    "Html": "\r\n<p>Just got back to looking into this...</p>\r\n<p>After dropping newer (1.0.82) versions of System.Data.SQLite into the module (bin/x32 and bin/x64), I can't create a drive:</p>\r\n<p>New-PSDrive : Could not load file or assembly 'System.Data.SQLite, Version=1.0.77.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139' or one of its dependencies. The system cannot find the file specified.</p>\r\n<p>Which makes sense, I guess, if the provider was compiled against the older version.</p>\r\n<p>I couldn't be bothered to mess around with &lt;bindingRedirect&gt; in the Powershell config file, so I recompiled to provider from sources with the latest SQLite libs.</p>\r\n<p>Now I can create a drive, but can't connect to it:</p>\r\n<p>PS&gt;ipmo SQLite<br>\r\nPS&gt;new-psdrive -name db -psp SQLite -root &quot;Data Source=c:\\temp\\mr.db&quot;</p>\r\n<p>Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Used (GB)&nbsp;&nbsp;&nbsp;&nbsp; Free (GB) Provider&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Root&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; CurrentLocation<br>\r\n----&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ---------&nbsp;&nbsp;&nbsp;&nbsp; --------- --------&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ----&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ---------------<br>\r\ndb&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SQLite&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [Data Source=c:\\temp\\mr.db]</p>\r\n<p>PS&gt;dir db:\\<br>\r\nno current SQLite session exists<br>\r\nAt line:1 char:1<br>\r\n+&nbsp; &lt;&lt;&lt;&lt; dir db:\\<br>\r\n&nbsp;&nbsp;&nbsp; + CategoryInfo&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : InvalidOperation: (:) [], InvalidOperationException<br>\r\n&nbsp;&nbsp;&nbsp; + FullyQualifiedErrorId : GetChildrenDynamicParametersProviderException</p>\r\n<p>I guess something more fundamental changed in System.Data.SQLite that will require a provider change...</p>\r\n<p>&nbsp;</p>\r\n",
+    "PostedDate": "2013-01-04T12:55:29.567-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "983196",
+    "ThreadId": "415159",
+    "Html": "\r\n<p>Actually it looks like there's some method interception that's not happening in my build. Maybe I didn't build it correctly? I didn't seem to get any errors when doing:</p>\r\n<p>ipmo &lt;psakedir&gt;/psake.psm1</p>\r\n<p>invoke-psake .\\default.ps1</p>\r\n<p>[Although admittedly, I'm not all that familiar with psake or PostSharp]</p>\r\n",
+    "PostedDate": "2013-01-04T14:06:04.203-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "983216",
+    "ThreadId": "415159",
+    "Html": "\r\n<p>Ah, I see - I need to have an offical release of PostSharp installed in order to build this correctly. This seems to be a licensed commercial product - is there a free version available for open source development?</p>\r\n<p>Anyway after installing a PostSharp eval version I can import the module, create a drive, and see the schema of my database.</p>\r\n<p>Unfortunately, querying a table now seems to hang...</p>\r\n<p>Getting closer, though!</p>\r\n",
+    "PostedDate": "2013-01-04T15:25:02.247-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "985513",
+    "ThreadId": "415159",
+    "Html": "\r\n<p>Yeah, that's been a recurring issue with many of my OSS projects - Postsharp is great but licensed.&nbsp; They do have a free version but I'm pretty sure it doesn't do everything you'll need to build the provider.&nbsp; They also have an OSS licensing program but\r\n it's on a per-project basis and requires a special install.&nbsp; I'm in the process of removing the Postsharp dependency from the provider framework - would you be open to testing it out with this project when it's ready (hopefully in the next week)?</p>\r\n",
+    "PostedDate": "2013-01-11T08:40:05.9-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1177754",
+    "ThreadId": "415159",
+    "Html": "I would ;)<br />\n",
+    "PostedDate": "2014-01-18T10:01:51.277-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

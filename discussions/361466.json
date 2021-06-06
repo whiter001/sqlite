@@ -1,0 +1,26 @@
+[
+  {
+    "Id": "855723",
+    "ThreadId": "361466",
+    "Html": "\r\n<p>Tank you for this project. Looking forward to explore SQLite with Powershell.</p>\r\n<p>I'm using V2.0, but when I import module sqlite, I get this message.</p>\r\n<p>Can you tell me what it means and how I can solve it ? (Win7 laptop)</p>\r\n<p>Import-Module : Could not load file or assembly 'file:///C:\\Users\\me\\Documents\\Windo<br>\r\nwsPowerShell\\Modules\\sqlite\\bin\\CodeOwls.PowerShell.SQLite.Provider.dll' or one of its\r\n<br>\r\ndependencies. This assembly is built by a runtime newer than the currently loaded runti<br>\r\nme and cannot be loaded.<br>\r\nAt C:\\Users\\me\\Documents\\Powershell\\SQLite test1.ps1:16 char:15<br>\r\n&#43;&nbsp;&nbsp;&nbsp;&nbsp; import-module &lt;&lt;&lt;&lt;&nbsp; sqlite <br>\r\n&nbsp;&nbsp;&nbsp; &#43; CategoryInfo&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : NotSpecified: (:) [Import-Module], BadImageFormatExcepti\r\n<br>\r\n&nbsp;&nbsp; on<br>\r\n&nbsp;&nbsp;&nbsp; &#43; FullyQualifiedErrorId : System.BadImageFormatException,Microsoft.PowerShell.Comm\r\n<br>\r\n&nbsp;&nbsp; ands.ImportModuleCommand</p>\r\n<p>&nbsp;</p>\r\n<p>I think the above message may be related to Windows 8 ? ( I'm still on Win7)</p>\r\n<p>&nbsp;</p>\r\n<p>I reverted to V1.0 and got that to work.</p>\r\n<p>The only thing I notice is that querying a 10,000 rows table is sloooooow.&nbsp; (full db = 1MB)<br>\r\n(csv export of full table = 600Kb)</p>\r\n<p>As this is my first experience with SQLite and I only need to&nbsp; extract a bout 50 rows at a time, taking me 2minutes,\r\n<br>\r\nI haven't got a good first impression on SQLite performance.</p>\r\n<p>When I query the data using &quot;SQLite Database Browser 2.0 b1&quot; it goes relativly fast. ( 4 seconds )</p>\r\n<p>What can I do to make my powershell exporting faster ?</p>\r\n<p>&nbsp;</p>\r\n",
+    "PostedDate": "2012-06-30T00:16:44.11-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "857018",
+    "ThreadId": "361466",
+    "Html": "<p>@ALZDBA;</p>\r\n<p>The error was my fault.&nbsp; I've uploaded a fixed archive of 1.1 to address the issue.</p>\r\n<p>&nbsp;</p>\r\n<p>Regarding the performance issues - PowerShell does a ton of work for each item returned from a provider.&nbsp; The query itself takes almost no time at all, but the extra provider properties PowerShell adds to each item adds up to a significant amount of time.</p>\r\n<p>I'd recommend using the new invoke-item feature of the v1.1 release if you need more performance from the module.&nbsp; E.g., instead of this:</p>\r\n<p>&gt; ls db:\\data</p>\r\n<p>try this:</p>\r\n<p>&gt; invoke-item db:\\ -sql \"select * from data\"</p>\r\n<p>&nbsp;</p>\r\n<p>Using invoke-item will bypass the powershell item property management stuff; this will save you some time.</p>",
+    "PostedDate": "2012-07-03T12:46:11.927-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "858269",
+    "ThreadId": "361466",
+    "Html": "<p>Thanks.</p>\r\n<p>&nbsp;</p>",
+    "PostedDate": "2012-07-06T03:26:28.74-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

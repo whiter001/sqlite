@@ -1,0 +1,65 @@
+{
+  "WorkItem": {
+    "AffectedComponent": {
+      "Name": "",
+      "DisplayName": ""
+    },
+    "ClosedComment": "",
+    "ClosedDate": null,
+    "CommentCount": 5,
+    "Custom": null,
+    "Description": "\r\nI downloaded the module and added in the Modules folder of my power shell.\r\n\r\nThen open the Power Shell and tried to import the module\r\n\r\n\r\n```\r\nipmo : Could not load file or assembly\r\n'file:///{omited}\\WindowsPowerShell\\Modules\\SQLite\\bin\\CodeOwls.PowerShell.Paths.dll' or one of its\r\ndependencies. Operation is not supported. (Exception from HRESULT: 0x80131515)\r\nAt {omited}\\WindowsPowerShell\\Modules\\SQLite\\start-sqlite.psm1:78 char:30\r\n+ ls $PSScriptRoot/bin/*.dll | ipmo;\r\n+                              ~~~~\r\n    + CategoryInfo          : NotSpecified: (:) [Import-Module], FileLoadException\r\n    + FullyQualifiedErrorId : System.IO.FileLoadException,Microsoft.PowerShell.Commands.ImportModuleCommand\r\n\r\nipmo : Could not load file or assembly\r\n'file:///{omited}\\WindowsPowerShell\\Modules\\SQLite\\bin\\x64\\System.Data.SQLite.dll' or one of its\r\ndependencies. Operation is not supported. (Exception from HRESULT: 0x80131515)\r\nAt {omited}\\WindowsPowerShell\\Modules\\SQLite\\start-sqlite.psm1:83 char:35\r\n+     ls $PSScriptRoot/bin/x64/*.dll | ipmo;\r\n+                                      ~~~~\r\n    + CategoryInfo          : NotSpecified: (:) [Import-Module], FileLoadException\r\n    + FullyQualifiedErrorId : System.IO.FileLoadException,Microsoft.PowerShell.Commands.ImportModuleCommand\r\n\r\nimport-module : Could not load file or assembly\r\n'file:///{omited}\\WindowsPowerShell\\Modules\\SQLite\\bin\\CodeOwls.PowerShell.SQLite.Provider.dll' or\r\none of its dependencies. Operation is not supported. (Exception from HRESULT: 0x80131515)\r\nAt line:1 char:1\r\n+ import-module SQLite\r\n+ ~~~~~~~~~~~~~~~~~~~~\r\n    + CategoryInfo          : NotSpecified: (:) [Import-Module], FileLoadException\r\n    + FullyQualifiedErrorId : System.IO.FileLoadException,Microsoft.PowerShell.Commands.ImportModuleCommand\r\n\r\n```",
+    "LastUpdatedDate": "2016-10-19T08:24:26.5-07:00",
+    "PlannedForRelease": "",
+    "ReleaseVisibleToPublic": false,
+    "Priority": {
+      "Name": "Unassigned",
+      "Severity": 0,
+      "Id": 0
+    },
+    "ProjectName": "psqlite",
+    "ReportedDate": "2015-02-11T14:32:55.997-08:00",
+    "Status": {
+      "Name": "Proposed",
+      "Id": 1
+    },
+    "ReasonClosed": {
+      "Name": "Unassigned"
+    },
+    "Summary": "Erro on Import module",
+    "Type": {
+      "Name": "Unassigned",
+      "Id": 5
+    },
+    "VoteCount": 5,
+    "Id": 13
+  },
+  "FileAttachments": [],
+  "Comments": [
+    {
+      "Message": "I have Windows 8.1 x64",
+      "PostedDate": "2015-05-15T08:07:20.063-07:00",
+      "Id": 184430
+    },
+    {
+      "Message": "What is the value of your $psversiontable variable?  Please list all keys returned.",
+      "PostedDate": "2015-05-16T13:37:25.843-07:00",
+      "Id": 184467
+    },
+    {
+      "Message": "I'm seeing this as well on Windows 10 (10586). Here's my $psversiontable output:\n\n```\nPS C:\\Users\\Josh\\Downloads\\SQLite.1.1.0.0> $psversiontable\n\nName                           Value\n----                           -----\nPSVersion                      5.0.10586.122\nPSCompatibleVersions           {1.0, 2.0, 3.0, 4.0...}\nBuildVersion                   10.0.10586.122\nCLRVersion                     4.0.30319.42000\nWSManStackVersion              3.0\nPSRemotingProtocolVersion      2.3\nSerializationVersion           1.1.0.1\n```",
+      "PostedDate": "2016-03-13T20:56:06.887-07:00",
+      "Id": 197887
+    },
+    {
+      "Message": "Nevermind. For me, the problem was resolved when I unblocked all of the files using the Unblock-File cmdlet. After that, it imported without a problem. ",
+      "PostedDate": "2016-03-13T21:15:36.99-07:00",
+      "Id": 197888
+    },
+    {
+      "Message": "Thanks for this topic! I had the same issue under Windows 7.0\nSame lame error messages.\n\n\nUnblock did not _appear_ to fix it, as error persisted.\nAll that was needed was  fresh process after the unblock and it worked for me.\n\ndir -recurse C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\Modules\\SQLite | unblock-file\n\nHein\n\n",
+      "PostedDate": "2016-10-19T08:24:26.5-07:00",
+      "Id": 204757
+    }
+  ]
+}

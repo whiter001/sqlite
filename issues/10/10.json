@@ -1,0 +1,39 @@
+{
+  "WorkItem": {
+    "AffectedComponent": {
+      "Name": "",
+      "DisplayName": ""
+    },
+    "ClosedComment": "",
+    "ClosedDate": null,
+    "CommentCount": 0,
+    "Custom": null,
+    "Description": "If a text field has a NOT NULL constraint on it, then psqlite won't be able to write an empty string \"\" to it.\r\n\r\nSteps to reproduce problem:\r\n\r\n1. Create a table called TestTable that has a TEXT field called TextField which has a NOT NULL constraint on it.\r\n2. Do `new-item db:\\TestTable -TextField \"\"`\r\n1. New-Item will throw an error \"Cannot bind argument to parameter 'TextField' because it is an empty string.\" \r\n\r\nThis is incorrect behavior because an empty string is not the same things as a NULL string. It is possible to set NOT NULL text fields to \"\" via SQL.",
+    "LastUpdatedDate": "2014-11-02T22:52:27.73-08:00",
+    "PlannedForRelease": "",
+    "ReleaseVisibleToPublic": false,
+    "Priority": {
+      "Name": "Unassigned",
+      "Severity": 0,
+      "Id": 0
+    },
+    "ProjectName": "psqlite",
+    "ReportedDate": "2014-11-02T22:52:27.73-08:00",
+    "Status": {
+      "Name": "Proposed",
+      "Id": 1
+    },
+    "ReasonClosed": {
+      "Name": "Unassigned"
+    },
+    "Summary": "New-Item : Cannot bind argument to parameter 'TextField' because it is an empty string.",
+    "Type": {
+      "Name": "Unassigned",
+      "Id": 5
+    },
+    "VoteCount": 1,
+    "Id": 10
+  },
+  "FileAttachments": [],
+  "Comments": []
+}

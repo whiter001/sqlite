@@ -1,0 +1,12 @@
+<div class="wikidoc"><h1>Using Transactions</h1>
+The SQLite PowerShell provider is transaction-aware.  If the PowerShell session has an active transaction, the SQLite provider enlists the transaction for any database activity <b>if you specify the -useTransaction parameter of the provider cmdlets</b>.<br /><br />For example, this code wraps the creation of 100 users in a transaction.  If the transaction fails (e.g., if the computer crashes), none of the 100 user records will be added to the database:<br /><br /><div style="color:Black;background-color:White;"><pre>
+PS<span style="color:Gray;">&gt;</span> start<span style="color:Gray;">-</span>transaction
+PS<span style="color:Gray;">&gt;</span> 1..100 | new<span style="color:Gray;">-</span>item mydb:<span style="color:Gray;">/</span>Users <span style="color:Gray;">-</span>username { <span style="color:#A31515;">&quot;UserID$_&quot;</span> } <span style="color:Gray;">-</span>usetransaction
+PS<span style="color:Gray;">&gt;</span> complete<span style="color:Gray;">-</span>transaction
+</pre></div><br />Transactions can span multiple operations on the same database:<br /><br /><div style="color:Black;background-color:White;"><pre>
+PS<span style="color:Gray;">&gt;</span> start<span style="color:Gray;">-</span>transaction
+PS<span style="color:Gray;">&gt;</span> <span style="color:OrangeRed;">$users</span> <span style="color:Gray;">=</span> get<span style="color:Gray;">-</span>childitems mydb:<span style="color:Gray;">/</span>Users <span style="color:Gray;">-</span><span style="color:Blue;">filter</span> <span style="color:#A31515;">&quot;status=1&quot;</span> <span style="color:Gray;">-</span>usetransaction
+PS<span style="color:Gray;">&gt;</span> <span style="color:OrangeRed;">$users</span> | set<span style="color:Gray;">-</span>item <span style="color:Gray;">-</span>value @{ status<span style="color:Gray;">=</span>0, active<span style="color:Gray;">=</span>0 } <span style="color:Gray;">-</span>usetransaction
+PS<span style="color:Gray;">&gt;</span> remove<span style="color:Gray;">-</span>item <span style="color:Gray;">-</span>mydb:<span style="color:Gray;">/</span>Users <span style="color:Gray;">-</span><span style="color:Blue;">filter</span> <span style="color:#A31515;">&#39;active=0&#39;</span> <span style="color:Gray;">-</span>usetransaction
+PS<span style="color:Gray;">&gt;</span> complete<span style="color:Gray;">-</span>transaction
+</pre></div></div><div class="ClearBoth"></div>

@@ -1,0 +1,106 @@
+<div class="wikidoc"><h1>Overview</h1>The SQLite PowerShell Provider enables you to use SQLite databases from your PowerShell session by mounting the database as a drive.  You can then use the standard provider cmdlets to perform CRUD operations on the database tables and records.<br /><br />The provider supports both persistent (on-disk) and transient (memory-only) SQLite databases.  In addition, the provider is transaction-aware.  <br /><br />For more information and examples, please refer to the User&#39;s Guide in the <a href="https://psqlite.codeplex.com/documentation?referringTitle=Home">Documentation</a>.<br /><br />
+<h1>Summary</h1>
+Below is a summary of SQLite PowerShell Provider operations:<br /><br /><div style="color:Black;background-color:White;"><pre>
+PS<span style="color:Gray;">&gt;</span> import<span style="color:Gray;">-</span>module SQLite
+PS<span style="color:Gray;">&gt;</span> new<span style="color:Gray;">-</span>psdrive <span style="color:Gray;">-</span>name db <span style="color:Gray;">-</span>psp SQLite <span style="color:Gray;">-</span>root <span style="color:#A31515;">&quot;Data Source=data.sqlite&quot;</span>
+
+Name Provider Root 
+<span style="color:Gray;">--</span><span style="color:Gray;">--</span> <span style="color:Gray;">--</span><span style="color:Gray;">--</span><span style="color:Gray;">--</span><span style="color:Gray;">--</span> <span style="color:Gray;">--</span><span style="color:Gray;">--</span> 
+db   SQLite   <span style="color:Gray;">[</span><span style="color:Teal;">Data Source=data.sqlite</span><span style="color:Gray;">]</span>                                             
+
+
+PS<span style="color:Gray;">&gt;</span> new<span style="color:Gray;">-</span>item db:<span style="color:Gray;">/</span>MyTable <span style="color:Gray;">-</span>id integer primary key <span style="color:Gray;">-</span>username text <span style="color:Gray;">-</span>userid integer not null
+
+
+PSPath           : SQLite::<span style="color:Gray;">[</span><span style="color:Teal;">Data Source=data.sqlite</span><span style="color:Gray;">]</span>\MyTable
+PSParentPath     : SQLite::<span style="color:Gray;">[</span><span style="color:Teal;">Data Source=data.sqlite</span><span style="color:Gray;">]</span>
+PSChildName      : MyTable
+PSDrive          : db
+PSProvider       : SQLite
+PSIsContainer    : True
+TABLE_CATALOG    : main
+TABLE_SCHEMA     : 
+TABLE_NAME       : MyTable
+TABLE_TYPE       : table
+TABLE_ID         : 1
+TABLE_ROOTPAGE   : 2
+TABLE_DEFINITION : CREATE TABLE MyTable ( id integer primary key, username text, userid integer not null )
+
+
+
+PS<span style="color:Gray;">&gt;</span> new<span style="color:Gray;">-</span>item db:<span style="color:Gray;">/</span>MyTable <span style="color:Gray;">-</span>username <span style="color:#A31515;">&#39;beef&#39;</span> <span style="color:Gray;">-</span>userid 1
+
+
+PSPath        : SQLite::<span style="color:Gray;">[</span><span style="color:Teal;">Data Source=data.sqlite</span><span style="color:Gray;">]</span>\MyTable\1
+PSParentPath  : SQLite::<span style="color:Gray;">[</span><span style="color:Teal;">Data Source=data.sqlite</span><span style="color:Gray;">]</span>\MyTable
+PSChildName   : 1
+PSDrive       : db
+PSProvider    : SQLite
+PSIsContainer : False
+id            : 1
+username      : beef
+userid        : 1
+
+
+
+PS<span style="color:Gray;">&gt;</span> 2..200 | new<span style="color:Gray;">-</span>item db:<span style="color:Gray;">/</span>MyTable <span style="color:Gray;">-</span>username { <span style="color:#A31515;">&quot;User$_&quot;</span> } <span style="color:Gray;">-</span>userid {<span style="color:OrangeRed;">$_</span>}
+
+
+PSPath        : SQLite::<span style="color:Gray;">[</span><span style="color:Teal;">Data Source=data.sqlite</span><span style="color:Gray;">]</span>\MyTable\2
+PSParentPath  : SQLite::<span style="color:Gray;">[</span><span style="color:Teal;">Data Source=data.sqlite</span><span style="color:Gray;">]</span>\MyTable
+PSChildName   : 2
+PSDrive       : db
+PSProvider    : SQLite
+PSIsContainer : False
+id            : 2
+username      : User2
+userid        : 2
+
+PSPath        : SQLite::<span style="color:Gray;">[</span><span style="color:Teal;">Data Source=data.sqlite</span><span style="color:Gray;">]</span>\MyTable\3
+PSParentPath  : SQLite::<span style="color:Gray;">[</span><span style="color:Teal;">Data Source=data.sqlite</span><span style="color:Gray;">]</span>\MyTable
+PSChildName   : 3
+PSDrive       : db
+PSProvider    : SQLite
+PSIsContainer : False
+id            : 3
+username      : User3
+userid        : 3
+
+<span style="color:Green;"># ...</span>
+
+PSPath        : SQLite::<span style="color:Gray;">[</span><span style="color:Teal;">Data Source=data.sqlite</span><span style="color:Gray;">]</span>\MyTable\200
+PSParentPath  : SQLite::<span style="color:Gray;">[</span><span style="color:Teal;">Data Source=data.sqlite</span><span style="color:Gray;">]</span>\MyTable
+PSChildName   : 200
+PSDrive       : db
+PSProvider    : SQLite
+PSIsContainer : False
+id            : 200
+username      : User200
+userid        : 200
+
+
+
+PS<span style="color:Gray;">&gt;</span> ls db:<span style="color:Gray;">/</span>MyTable | select username, id 
+
+username     id
+<span style="color:Gray;">--</span><span style="color:Gray;">--</span><span style="color:Gray;">--</span><span style="color:Gray;">--</span>     <span style="color:Gray;">--</span>
+beef         1
+User2        2
+<span style="color:Green;"># ...</span>
+User200      200
+
+
+PS<span style="color:Gray;">&gt;</span> ls db:<span style="color:Gray;">/</span>MyTable <span style="color:Gray;">-</span><span style="color:Blue;">filter</span> <span style="color:#A31515;">&quot;username=&#39;beef&#39;&quot;</span> | select username, id 
+
+username     id
+<span style="color:Gray;">--</span><span style="color:Gray;">--</span><span style="color:Gray;">--</span><span style="color:Gray;">--</span>     <span style="color:Gray;">--</span>
+beef         1
+
+
+PS<span style="color:Gray;">&gt;</span> set<span style="color:Gray;">-</span>item db:<span style="color:Gray;">/</span>MyTable <span style="color:Gray;">-</span><span style="color:Blue;">filter</span> <span style="color:#A31515;">&quot;username=&#39;beef&#39;&quot;</span> <span style="color:Gray;">-</span>value @{ username<span style="color:Gray;">=</span><span style="color:#A31515;">&#39;jimbo&#39;</span> }
+PS<span style="color:Gray;">&gt;</span> ls db:<span style="color:Gray;">/</span>MyTable <span style="color:Gray;">-</span><span style="color:Blue;">filter</span> <span style="color:#A31515;">&quot;id=1&quot;</span> | select username, id 
+
+username     id
+<span style="color:Gray;">--</span><span style="color:Gray;">--</span><span style="color:Gray;">--</span><span style="color:Gray;">--</span>     <span style="color:Gray;">--</span>
+jimbo        1
+</pre></div></div><div class="ClearBoth"></div>

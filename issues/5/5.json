@@ -1,0 +1,45 @@
+{
+  "WorkItem": {
+    "AffectedComponent": {
+      "Name": "",
+      "DisplayName": ""
+    },
+    "ClosedComment": "",
+    "ClosedDate": null,
+    "CommentCount": 1,
+    "Custom": null,
+    "Description": "Add support for invoke-item on the database path node to allow for the execution of arbitrary SQL statements.  For instance:\r\n\r\ninvoke-item -path mydb:\\ -sql \"SELECT * FROM T1 INNER JOIN T2 ON T1.Id=T2.t1Id\"\r\n\r\nPerhaps even add a \"sqliteprocedures\" table to each database users can use to store parameterized queries:\r\n\r\n# this stores the SQL SELECT * FROM STUFF into the sqliteprocedures table under the key MyPSProc:\r\nnew-item -path mydb:\\sqliteprocedures -name MyPSProc -value \"SELECT * FROM STUFF\"\r\n\r\n# this executes the MyPSProc sql stored in the database:\r\ninvoke-item -path MyDB:\\SqliteProcedures\\MyPSProc\r\n\r\n",
+    "LastUpdatedDate": "2017-12-08T23:33:34.973-08:00",
+    "PlannedForRelease": "SQLite Provider 1.1",
+    "ReleaseVisibleToPublic": true,
+    "Priority": {
+      "Name": "Low",
+      "Severity": 50,
+      "Id": 1
+    },
+    "ProjectName": "psqlite",
+    "ReportedDate": "2012-02-10T13:58:42.563-08:00",
+    "Status": {
+      "Name": "Resolved",
+      "Id": 7
+    },
+    "ReasonClosed": {
+      "Name": "Unassigned"
+    },
+    "Summary": "Add Ability to Execute Arbitrary SQL Statements",
+    "Type": {
+      "Name": "Feature",
+      "Id": 1
+    },
+    "VoteCount": 1,
+    "Id": 5
+  },
+  "FileAttachments": [],
+  "Comments": [
+    {
+      "Message": "implemented in 1.1 release",
+      "PostedDate": "2012-06-25T11:30:21.26-07:00",
+      "Id": 68932
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+[
+  {
+    "Id": "987981",
+    "ThreadId": "429873",
+    "Html": "\r\n<p>Sorry, I'm still here with a question: is there a limit to the amount of lines you can handle with your provider?</p>\r\n<p>Let me explain: my code should trigger a database to a file of several thousand rows, but arrived at the 1000 stops and begin a series of errors<span style=\"font-size:10pt\">.</span></p>\r\n<p><span style=\"font-size:10pt\">If there is no such limit, then I move my attention to temporary variables that I use.</span></p>\r\n<p><span style=\"font-size:10pt\">Thanks<br>\r\nSergio</span></p>\r\n",
+    "PostedDate": "2013-01-17T01:03:21.813-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "988038",
+    "ThreadId": "429873",
+    "Html": "\r\n<p><span style=\"font-size:10pt\">It is becoming a habit: I have the answer! XD</span></p>\r\n<p><span style=\"font-size:10pt\">&gt;1000 Items: Seems like a limit is a limit of SQLITEStudio I use to display the data..</span></p>\r\n<p><span style=\"font-size:10pt\">About errors i will investigate.&nbsp;</span></p>\r\n<p><span style=\"font-size:10pt\">Thanks :)&nbsp;</span></p>\r\n<p><span style=\"font-size:10pt\">PS: I'm a little stupid.. Clicking &quot;Next Page&quot; seems usefull :P</span></p>\r\n",
+    "PostedDate": "2013-01-17T02:49:07.753-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

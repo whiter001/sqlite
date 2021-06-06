@@ -1,0 +1,55 @@
+{
+  "WorkItem": {
+    "AffectedComponent": {
+      "Name": "",
+      "DisplayName": ""
+    },
+    "ClosedComment": "",
+    "ClosedDate": null,
+    "CommentCount": 3,
+    "Custom": null,
+    "Description": "I've installed the 1.1 version of sqlite powershell provider, when I attempt to use invoke-item method it fails, below is an excerpt of some sample code and the error message.\r\n\r\n#################\r\nclear\r\nImport-Module sqlite\r\nNew-PSDrive -Name MyDB -PSProvider SQLite -Root \"\"\r\nnew-item -Path mydb:/Test -Value \"ID INTEGER PRIMARY KEY,Uname TEXT NOT NULL,uid INTEGER\"\r\nnew-item -Path mydb:/Test -uname \"Joe\" -uid 1\r\nnew-item -Path mydb:/Test -uname \"Jim\" -uid 2\r\nGet-ChildItem mydb:test\r\nInvoke-Item mydb:\\test -sql \"select * from test\"\r\nRemove-PSDrive MyDB\r\n#############\r\n\r\n\r\nInvoke-Item : A parameter cannot be found that matches parameter name 'sql'.\r\nAt line:8 char:28\r\n+ Invoke-Item mydb:\\test -sql <<<<  \"select * from test\"\r\n    + CategoryInfo          : InvalidArgument: (:) [Invoke-Item], ParameterBindingException\r\n    + FullyQualifiedErrorId : NamedParameterNotFound,Microsoft.PowerShell.Commands.InvokeItemCommand\r\n \r\n",
+    "LastUpdatedDate": "2012-08-02T08:26:58.67-07:00",
+    "PlannedForRelease": "",
+    "ReleaseVisibleToPublic": false,
+    "Priority": {
+      "Name": "Low",
+      "Severity": 50,
+      "Id": 1
+    },
+    "ProjectName": "psqlite",
+    "ReportedDate": "2012-07-30T14:12:08.203-07:00",
+    "Status": {
+      "Name": "Proposed",
+      "Id": 1
+    },
+    "ReasonClosed": {
+      "Name": "Unassigned"
+    },
+    "Summary": "Issue with using invoke-item -sql",
+    "Type": {
+      "Name": "Issue",
+      "Id": 3
+    },
+    "VoteCount": 1,
+    "Id": 7
+  },
+  "FileAttachments": [],
+  "Comments": [
+    {
+      "Message": "I can't replicate this behavior - your code above works just fine for me...\n\nCan you verify the version of the module you're loading by running these commands?\n\nimport-module sqlite;\nget-module sqlite | select -exp path | gi | select *\n\nPlease copy the output into this issue.",
+      "PostedDate": "2012-08-01T08:41:04.917-07:00",
+      "Id": 73201
+    },
+    {
+      "Message": "import-module sqlite;\nNIS-H3VTHQ1\\C:\\PowerShell ndavis 08/01/2012 09:27:16>\nget-module sqlite | select -exp path | gi | select *\n\n\nPSPath            : Microsoft.PowerShell.Core\\FileSystem::C:\\Users\\ndavis\\Documents\\WindowsPowerShell\\Modules\\sqlite\\bin\\CodeOwls.PowerShell.SQLite.Provider.dl\n                    l\nPSParentPath      : Microsoft.PowerShell.Core\\FileSystem::C:\\Users\\ndavis\\Documents\\WindowsPowerShell\\Modules\\sqlite\\bin\nPSChildName       : CodeOwls.PowerShell.SQLite.Provider.dll\nPSDrive           : C\nPSProvider        : Microsoft.PowerShell.Core\\FileSystem\nPSIsContainer     : False\nReparsePoint      :\nVersionInfo       : File:             C:\\Users\\ndavis\\Documents\\WindowsPowerShell\\Modules\\sqlite\\bin\\CodeOwls.PowerShell.SQLite.Provider.dll\n                    InternalName:     CodeOwls.PowerShell.SQLite.Provider.dll\n                    OriginalFilename: CodeOwls.PowerShell.SQLite.Provider.dll\n                    FileVersion:      1.0.0.0\n                    FileDescription:  CodeOwls.PowerShell.SQLite.Provider\n                    Product:          CodeOwls.PowerShell.SQLite.Provider\n                    ProductVersion:   1.0.0.0\n                    Debug:            False\n                    Patched:          False\n                    PreRelease:       False\n                    PrivateBuild:     False\n                    SpecialBuild:     False\n                    Language:         Language Neutral\n\nBaseName          : CodeOwls.PowerShell.SQLite.Provider\nMode              : -----\nName              : CodeOwls.PowerShell.SQLite.Provider.dll\nLength            : 41984\nDirectoryName     : C:\\Users\\ndavis\\Documents\\WindowsPowerShell\\Modules\\sqlite\\bin\nDirectory         : C:\\Users\\ndavis\\Documents\\WindowsPowerShell\\Modules\\sqlite\\bin\nIsReadOnly        : False\nExists            : True\nFullName          : C:\\Users\\ndavis\\Documents\\WindowsPowerShell\\Modules\\sqlite\\bin\\CodeOwls.PowerShell.SQLite.Provider.dll\nExtension         : .dll\nCreationTime      : 2/8/2012 2:40:23 PM\nCreationTimeUtc   : 2/8/2012 10:40:23 PM\nLastAccessTime    : 2/8/2012 2:40:23 PM\nLastAccessTimeUtc : 2/8/2012 10:40:23 PM\nLastWriteTime     : 1/22/2012 1:40:42 PM\nLastWriteTimeUtc  : 1/22/2012 9:40:42 PM\nAttributes        : Normal\n",
+      "PostedDate": "2012-08-01T09:29:28.813-07:00",
+      "Id": 73205
+    },
+    {
+      "Message": "The file and product version should be 1.1.0.0; looks like you are importing the previous version of the module where these versions are 1.0.0.0.\n\nCan you verify your installation and module path?  Make sure that you've extracted the SQLite module into the correct location?",
+      "PostedDate": "2012-08-02T08:26:58.67-07:00",
+      "Id": 73263
+    }
+  ]
+}

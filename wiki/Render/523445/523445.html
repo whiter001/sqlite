@@ -1,0 +1,9 @@
+<div class="wikidoc"><h1>Creating Databases</h1>
+These instructions assume you have already imported the SQLite module into your PowerShell session.  If not, please refer to <a href="https://psqlite.codeplex.com/wikipage?title=Importing%20the%20Module&referringTitle=Creating%20Databases">Importing the Module</a>.<br /><br />To create a new SQLite database using the provider, you need to mount a new SQLite drive in your session using the new-psdrive PowerShell cmdlet.  For example:<br /><br /><div style="color:Black;background-color:White;"><pre>
+PS<span style="color:Gray;">&gt;</span> new<span style="color:Gray;">-</span>psdrive <span style="color:Gray;">-</span>psprovider SQLite <span style="color:Gray;">-</span>name mydb <span style="color:Gray;">-</span>root <span style="color:#A31515;">&quot;DataSource=datafile.sqlite&quot;</span>
+</pre></div>where:<br /><table><tr><td> psprovider </td><td> MUST be the string &#39;SQLite&#39; </td></tr>
+<tr><td> name </td><td> is the name of the new PowerShell drive to which the SQLite database will be associated </td></tr>
+<tr><td> root </td><td> is a valid SQLite connection string (<a href="http://www.connectionstrings.com/sqlite">examples</a>) </td></tr></table><br /><br />The SQLite module includes the mount-sqlite helper cmdlet that simplifies the syntax for mounting SQLite databases as drives:<br /><br /><div style="color:Black;background-color:White;"><pre>
+PS<span style="color:Gray;">&gt;</span> mount<span style="color:Gray;">-</span>sqlite <span style="color:Gray;">-</span>name mydb <span style="color:Gray;">-</span>dataSource datafile.sqlite
+</pre></div>where:<br /><table><tr><td> name </td><td> is the name of the new PowerShell drive to which the SQLite database will be associated </td></tr>
+<tr><td> dataSource </td><td> is the name of the SQLite data file; if unspecified, a transient in-memory database is created </td></tr></table><br /></div><div class="ClearBoth"></div>

@@ -1,0 +1,39 @@
+{
+  "WorkItem": {
+    "AffectedComponent": {
+      "Name": "",
+      "DisplayName": ""
+    },
+    "ClosedComment": "",
+    "ClosedDate": null,
+    "CommentCount": 0,
+    "Custom": null,
+    "Description": "\r\nHello I've made a CD WinPE 5.1 with Powershell 4.0.\r\n\r\nI'm trying to start a powershell apps with sqlite db. I can't import the dll\r\nThe Apps run perfectly in Win7 environement\r\n\r\nSomebody have try sqlite under WinPE 5.1 ?\r\n\r\nPS C:\\INSTALLER> $PSVersionTable\r\n\r\nName                           Value\r\n----                           -----\r\nPSVersion                      4.0\r\nWSManStackVersion              3.0\r\nSerializationVersion           1.1.0.1\r\nCLRVersion                     4.0.30319.33440\r\nBuildVersion                   6.3.9600.16384\r\nPSCompatibleVersions           {1.0, 2.0, 3.0, 4.0}\r\nPSRemotingProtocolVersion      2.2\r\n\r\nipmo : Could not load file or assembly 'System.Data.SQLite.dll' or one of its \r\ndependencies. The application has failed to start because its side-by-side \r\nconfiguration is incorrect. Please see the application event log or use the \r\ncommand-line sxstrace.exe tool for more detail. (Exception from HRESULT: \r\n0x800736B1)\r\nAt C:\\INSTALLER\\SQLite\\start-sqlite.psm1:88 char:41\r\n+     ls C:\\installer\\sqlite\\bin\\x32\\*.dll | ipmo;\r\n+                                            ~~~~\r\n    + CategoryInfo          : NotSpecified: (:) [Import-Module], FileLoadExcep \r\n   tion\r\n    + FullyQualifiedErrorId : System.IO.FileLoadException,Microsoft.PowerShell \r\n   .Commands.ImportModuleCommand\r\n \r\nNew-PSDrive : Could not load file or assembly 'System.Data.SQLite.dll' or one \r\nof its dependencies. The application has failed to start because its \r\nside-by-side configuration is incorrect. Please see the application event log \r\nor use the command-line sxstrace.exe tool for more detail. (Exception from \r\nHRESULT: 0x800736B1)",
+    "LastUpdatedDate": "2014-11-30T01:47:49.757-08:00",
+    "PlannedForRelease": "",
+    "ReleaseVisibleToPublic": false,
+    "Priority": {
+      "Name": "Unassigned",
+      "Severity": 0,
+      "Id": 0
+    },
+    "ProjectName": "psqlite",
+    "ReportedDate": "2014-11-30T01:47:49.757-08:00",
+    "Status": {
+      "Name": "Proposed",
+      "Id": 1
+    },
+    "ReasonClosed": {
+      "Name": "Unassigned"
+    },
+    "Summary": "Can't Import on WinPE 5.1 PS 4.0",
+    "Type": {
+      "Name": "Unassigned",
+      "Id": 5
+    },
+    "VoteCount": 1,
+    "Id": 11
+  },
+  "FileAttachments": [],
+  "Comments": []
+}

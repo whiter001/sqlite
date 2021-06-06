@@ -1,0 +1,18 @@
+[
+  {
+    "Id": "1304982",
+    "ThreadId": "567505",
+    "Html": "As it says in the subject: I've got a table with a related set of rows with values in a date column, and would like to select the largest date value from the related subset of rows. It'd feel cleaner to do this in the initial query, rather than iterate through the results of  \r<br />\n<pre><code>get-childitem mydb:/installation -filter &quot;hostname like '%laptop%'&quot;</code></pre>\n\nIn SQL, it'd look like <br />\n<pre><code>select max(rundt) as lateDate \nfrom table1\nwhere hostname = 'my laptop'</code></pre>\n\nIs this possible?<br />\n",
+    "PostedDate": "2014-09-15T15:16:13.633-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1315035",
+    "ThreadId": "567505",
+    "Html": "Please, try this<br />\n<pre><code>Invoke-Item mydb:/installation -sql &quot;select max(rundt) as lateDate from table1 where hostname = 'my laptop'&quot;</code></pre>\n\n",
+    "PostedDate": "2014-10-20T10:13:11.627-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

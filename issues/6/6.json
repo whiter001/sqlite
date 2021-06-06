@@ -1,0 +1,50 @@
+{
+  "WorkItem": {
+    "AffectedComponent": {
+      "Name": "",
+      "DisplayName": ""
+    },
+    "ClosedComment": "",
+    "ClosedDate": null,
+    "CommentCount": 2,
+    "Custom": null,
+    "Description": "I am trying to use the transaction example code from the documentation. When I attempt any new-item inside the transaction I get an error. I ran a simplified (non-looping) command and got the following error:\r\n\r\nNew-Item : The database file is locked\r\ndatabase is locked\r\nAt line:1 char:9\r\n+ new-item <<<<  mydb:\\Users -username \"scooby\" -userid 14 -UseTransaction\r\n    + CategoryInfo          : NotSpecified: (:) [New-Item], SQLiteException\r\n    + FullyQualifiedErrorId : System.Data.SQLite.SQLiteException,Microsoft.PowerShell.Commands.NewItemCommand\r\n\r\nWin 7x64 \r\npowershell 2.0\r\n\r\nLet me know if I can provide any more information.",
+    "LastUpdatedDate": "2017-12-08T23:33:34.973-08:00",
+    "PlannedForRelease": "SQLite Provider 1.1",
+    "ReleaseVisibleToPublic": true,
+    "Priority": {
+      "Name": "Medium",
+      "Severity": 100,
+      "Id": 2
+    },
+    "ProjectName": "psqlite",
+    "ReportedDate": "2012-06-19T10:18:22.923-07:00",
+    "Status": {
+      "Name": "Resolved",
+      "Id": 7
+    },
+    "ReasonClosed": {
+      "Name": "Unassigned"
+    },
+    "Summary": "Database locking with transaction",
+    "Type": {
+      "Name": "Issue",
+      "Id": 3
+    },
+    "VoteCount": 1,
+    "Id": 6
+  },
+  "FileAttachments": [],
+  "Comments": [
+    {
+      "Message": "Confirmed.  \r\n\r\nThis is likely caused by the way the provider connects/reconnects to the database during transactions.  This does not happen when using a memory-only database, so it's almost certainly a reconnection issue.\r\n\r\nAt the moment there is no workaround; however I'll pull together a 1.1 release containing this fix in the next week or so.",
+      "PostedDate": "2012-06-25T09:14:34.193-07:00",
+      "Id": 68895
+    },
+    {
+      "Message": "addressed in 1.1 release.  connections are now persistent for the life of the drive with which they are associated; this allows the same connection to be re-used across multiple transactional activities.\r\n",
+      "PostedDate": "2012-06-25T11:29:51.493-07:00",
+      "Id": 68931
+    }
+  ]
+}

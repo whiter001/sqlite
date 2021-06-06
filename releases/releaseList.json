@@ -1,0 +1,36 @@
+[
+  {
+    "Id": "0",
+    "Name": "SQLite Provider 1.0",
+    "DevelopmentStatus": "Beta",
+    "Description": "! Release Notes\nThis is the first release of the SQLite provider.  The provider presently supports the following provider cmdlets for tables and records:\n* new-item (CREATE TABLE, INSERT)\n* set-item (UPDATE)\n* remove-item (DELETE TABLE, DELETE)\n* get-childitem (SELECT)\n* get-item (SELECT)\n\nFor details on using these cmdlets against a SQLite database, see the [Documentation].\n\n! Installation\nThis release is distributed as a ZIP archive.  To make use of this module simply extract the SQLite folder to a location that is in your module path.  For instance, your ~/Documents/WindowsPowerShell/Modules folder.  For a list of module paths for your PowerShell session, try this:\n\n{code:powershell}\nPS> $env:psmodulepath\n{code:powershell}\n\nOnce the SQLite folder is in your module path, you can verify that the module is available by running this command:\n\n{code:powershell}\nPS> get-module -list SQLite\n\nModuleType Name ExportedCommands\n---------- ---- ----------------\nManifest   SQLite {}\n\n{code:powershell}",
+    "ReleasedDatge": "0001-01-01T00:00:00",
+    "ModifiedDate": "2012-01-22T10:49:16.687-08:00",
+    "Files": [
+      {
+        "Id": "4be0a91b-b7db-475f-97b5-9de5cfe44ef8",
+        "FileName": "SQLite.1.0.0.0.zip",
+        "Url": "./0/4be0a91b-b7db-475f-97b5-9de5cfe44ef8",
+        "Type": "Application",
+        "UploadDate": "2012-01-22T10:49:15.84-08:00"
+      }
+    ]
+  },
+  {
+    "Id": "1",
+    "Name": "SQLite Provider 1.1",
+    "DevelopmentStatus": "Beta",
+    "Description": "A wrap-up of fixes and features since the 1.0 release.\n\n* database connections now persists for the life of the SQLite drive with which they are associated.  this fixes issues related to using transactions and locked files.\n\n* the invoke-item cmdlet is supported on the drive and table nodes.  in both cases, the sql must be supplied in the dynamic -sql parameter added to the invoke-item cmdlet.  for instance:\n\n{code:powershell}\ninvoke-item db:/files -sql \"select * from files order by length\"\n{code:powershell}\n* when a table is created using the new-item cmdlet on the root node and the table spec does not contain a primary key field, a primary key field is inserted automatically.\n\n!! Notes\n\nArchive download updated on 7.3.2012 to fix incorrect framework version.",
+    "ReleasedDatge": "0001-01-01T00:00:00",
+    "ModifiedDate": "2012-07-03T12:33:09.707-07:00",
+    "Files": [
+      {
+        "Id": "a7d68b6c-f585-4f44-9d7b-812c79ccf962",
+        "FileName": "SQLite.1.1.0.0.zip",
+        "Url": "./1/a7d68b6c-f585-4f44-9d7b-812c79ccf962",
+        "Type": "Application",
+        "UploadDate": "2012-07-03T12:33:01.863-07:00"
+      }
+    ]
+  }
+]

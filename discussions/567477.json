@@ -1,0 +1,18 @@
+[
+  {
+    "Id": "1304869",
+    "ThreadId": "567477",
+    "Html": "so basically here is what i am doing:\r<br />\n<br />\ni connect to a webshare and download a sqlite database file to my local harddrive, for testing purposes i used &quot;c:\\test.sqlite&quot; in this example.\r<br />\n<br />\nthen i do this:\r<br />\n<br />\nnew-psdrive -name &quot;test_db&quot; -psprovider &quot;SQLite&quot; -root &quot;Data Source=C:\\test.sqlite&quot;\r<br />\n$test = get-childitem -name &quot;test_db:/test_table&quot;\r<br />\nremove-psdrive -name test_db\r<br />\nremove-item C:\\test.sqlite\r<br />\n<br />\nall works fine, until remove-item throws an error, telling me the file is still in use. checking open file handles confirms that the file is indeed still in use by the powershell process. only possible way to close the handle is to close and re-open powershell, which renders my script pretty much useless.\r<br />\n<br />\nsince opening a database with new-psdrive works, i thought remove-psdrive would work just the same to close it. actually, it will remove the psdrive handle, so i can't access the database anymore, but how can i close the actual file?\r<br />\n<br />\nplease help, i really need this to work -.-<br />\n",
+    "PostedDate": "2014-09-15T09:18:41.793-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1422663",
+    "ThreadId": "567477",
+    "Html": "Try using the following command after Remove-PSDrive and before Remove-Item:  &quot;Remove-Module SQLite&quot;<br />\n",
+    "PostedDate": "2015-05-04T01:32:30.943-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

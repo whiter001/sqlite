@@ -1,0 +1,39 @@
+{
+  "WorkItem": {
+    "AffectedComponent": {
+      "Name": "",
+      "DisplayName": ""
+    },
+    "ClosedComment": "",
+    "ClosedDate": null,
+    "CommentCount": 0,
+    "Custom": null,
+    "Description": "Getting this when I try to query the live DB. Works OK when I copy the DB to somewhere else and test though\r\n\r\nSome kind of disk I/O error occurred\r\ndisk I/O error\r\nAt line:11 char:1\r\n+ $open = invoke-item a: -sql \"SELECT * FROM tickets\"\r\n+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\r\n    + CategoryInfo          : InvalidOperation: (:) [], SQLiteException\r\n    + FullyQualifiedErrorId : InvokeDefaultActionDynamicParametersProviderException",
+    "LastUpdatedDate": "2014-12-15T19:22:33.933-08:00",
+    "PlannedForRelease": "",
+    "ReleaseVisibleToPublic": false,
+    "Priority": {
+      "Name": "Unassigned",
+      "Severity": 0,
+      "Id": 0
+    },
+    "ProjectName": "psqlite",
+    "ReportedDate": "2014-12-15T19:22:33.933-08:00",
+    "Status": {
+      "Name": "Proposed",
+      "Id": 1
+    },
+    "ReasonClosed": {
+      "Name": "Unassigned"
+    },
+    "Summary": "Some kind of disk I/O error occurred",
+    "Type": {
+      "Name": "Unassigned",
+      "Id": 5
+    },
+    "VoteCount": 1,
+    "Id": 12
+  },
+  "FileAttachments": [],
+  "Comments": []
+}

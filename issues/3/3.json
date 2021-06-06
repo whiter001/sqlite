@@ -1,0 +1,50 @@
+{
+  "WorkItem": {
+    "AffectedComponent": {
+      "Name": "",
+      "DisplayName": ""
+    },
+    "ClosedComment": "",
+    "ClosedDate": null,
+    "CommentCount": 2,
+    "Custom": null,
+    "Description": "Hi - I am running windows 7 64, powershell 64 bit using psqlite v1.0\r\nI can successfully load the module and create a table, but create a record fails. Below is a listing of what happens:\r\n\r\n\r\nImport-Module sqlite\r\nNew-PSDrive -Name db -psp SQLite\r\n\r\ncmdlet New-PSDrive at command pipeline position 1\r\nSupply values for the following parameters:\r\nRoot:\r\n\r\nName           Used (GB)     Free (GB) Provider      Root\r\n----           ---------     --------- --------      ----\r\ndb                                     SQLite        [data source=:memory:]\r\n\r\n\r\nNew-Item db:/MyTable -filename text\r\n\r\n\r\nPSPath           : SQLite::[data source=:memory:]\\MyTable\r\nPSParentPath     : SQLite::[data source=:memory:]\r\nPSChildName      : MyTable\r\nPSDrive          : db\r\nPSProvider       : SQLite\r\nPSIsContainer    : True\r\n\r\n\r\nGet-ChildItem db:\r\n\r\n\r\nPSPath           : SQLite::[data source=:memory:]\\MyTable\r\nPSParentPath     : SQLite::[data source=:memory:]\r\nPSChildName      : MyTable\r\nPSDrive          : db\r\nPSProvider       : SQLite\r\nPSIsContainer    : True\r\nSSItemMode       : d+~<\r\nTABLE_CATALOG    : main\r\nTABLE_SCHEMA     :\r\nTABLE_NAME       : MyTable\r\nTABLE_TYPE       : table\r\nTABLE_ID         : 1\r\nTABLE_ROOTPAGE   : 2\r\nTABLE_DEFINITION : CREATE TABLE MyTable ( filename text )\r\nRowError         :\r\nRowState         : Unchanged\r\nTable            : {MyTable}\r\nItemArray        : {main, , MyTable, table...}\r\nHasErrors        : False\r\n\r\nNew-Item -Path db:/MyTable -filename test\r\nNew-Item : Sequence contains no elements\r\nAt line:1 char:9\r\n+ New-Item <<<<  -Path db:/MyTable -filename test\r\n    + CategoryInfo          : NotSpecified: ([data source=:memory:]\\MyTable:String) [New-Item], InvalidOperationException\r\n    + FullyQualifiedErrorId : NewItem.Invoke,Microsoft.PowerShell.Commands.NewItemCommand\r\n\r\nNew-Item -Path db:/MyTable -filename \"test\"\r\nNew-Item : Sequence contains no elements\r\nAt line:1 char:9\r\n+ New-Item <<<<  -Path db:/MyTable -filename \"test\"\r\n    + CategoryInfo          : NotSpecified: ([data source=:memory:]\\MyTable:String) [New-Item], InvalidOperationException\r\n    + FullyQualifiedErrorId : NewItem.Invoke,Microsoft.PowerShell.Commands.NewItemCommand\r\n\r\nNew-Item -Path db:/MyTable -Value @{filename=\"test\"}\r\nNew-Item : Sequence contains no elements\r\nAt line:1 char:9\r\n+ New-Item <<<<  -Path db:/MyTable -Value @{filename=\"test\"}\r\n    + CategoryInfo          : NotSpecified: ([data source=:memory:]\\MyTable:String) [New-Item], InvalidOperationException\r\n    + FullyQualifiedErrorId : NewItem.Invoke,Microsoft.PowerShell.Commands.NewItemCommand\r\n\r\n\r\nTABLE_CATALOG    : main\r\nTABLE_SCHEMA     :\r\nTABLE_NAME       : MyTable\r\nTABLE_TYPE       : table\r\nTABLE_ID         : 1\r\nTABLE_ROOTPAGE   : 2\r\nTABLE_DEFINITION : CREATE TABLE MyTable ( filename text )\r\n\r\n\r\nI have been using the sqlite ado.net 2.0/3.5 version 1.065.0 successfully on my machine. Are there any conflicts between that and the your sqlite powershell provider.\r\n\r\nTIA\r\n\r\nNat Davis\r\n",
+    "LastUpdatedDate": "2017-12-08T23:33:34.973-08:00",
+    "PlannedForRelease": "SQLite Provider 1.1",
+    "ReleaseVisibleToPublic": true,
+    "Priority": {
+      "Name": "Low",
+      "Severity": 50,
+      "Id": 1
+    },
+    "ProjectName": "psqlite",
+    "ReportedDate": "2012-02-10T12:28:19.227-08:00",
+    "Status": {
+      "Name": "Resolved",
+      "Id": 7
+    },
+    "ReasonClosed": {
+      "Name": "Unassigned"
+    },
+    "Summary": "create record problem",
+    "Type": {
+      "Name": "Issue",
+      "Id": 3
+    },
+    "VoteCount": 1,
+    "Id": 3
+  },
+  "FileAttachments": [],
+  "Comments": [
+    {
+      "Message": "Hi Nat;\n\nTry adding a primary key column to your table spec.  The provider needs an identity column to be able to \"address\" each record consistently.  My apologies - this isn't clear at all from the docs; come to think of it, the provider should add a primary key column if the table spec doesn't include one....  (opening issue now).\n\nJim",
+      "PostedDate": "2012-02-10T13:48:26.84-08:00",
+      "Id": 55730
+    },
+    {
+      "Message": "added automagic primary key feature in 1.1",
+      "PostedDate": "2012-06-25T11:32:26.84-07:00",
+      "Id": 68934
+    }
+  ]
+}

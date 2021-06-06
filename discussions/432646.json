@@ -1,0 +1,26 @@
+[
+  {
+    "Id": "999248",
+    "ThreadId": "432646",
+    "Html": "hi\r<br />\nimtrying to import the module in a server windows 2008 r2 , and i getting the following error.\r<br />\nusing the same module in my win7 it works ok\r<br />\nany ideas?\r<br />\n<br />\n<br />\nPS C:\\Users\\Administrator&gt; Import-Module sqlite\r<br />\nImport-Module : Could not load file or assembly 'System.Data.SQLite, Version=1.0.77.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139' or one of its dependencies. The application has failed to start because its side-by-side configuration is incorrect. Please see the application event log or use the command-line sxstrace.exe tool for more detail. (Exception from HRESULT: 0x800736B1)\r<br />\nAt C:\\Windows\\system32\\WindowsPowerShell\\v1.0\\Modules\\sqlite\\start-sqlite.psm1:83 char:39<br />\n<ul>\n<li>\nls $PSScriptRoot/bin/x64/*.dll | ipmo &lt;&lt;&lt;&lt; ;\n<ul>\n<li>CategoryInfo          : NotSpecified: (:) [Import-Module], FileLoadException</li>\n<li>FullyQualifiedErrorId : System.IO.FileLoadException,Microsoft.PowerShell.Commands.ImportModuleCommand</li>\n</ul>\n</li>\n</ul>\n",
+    "PostedDate": "2013-02-10T11:56:15.113-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "999543",
+    "ThreadId": "432646",
+    "Html": "Any chance you may have forgotten to unblock the zip file before extracting the module?<br />\n\r<br />\nWhat's the value of $psversiontable on your 2008r2?<br />\n",
+    "PostedDate": "2013-02-11T05:24:37.183-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "999640",
+    "ThreadId": "432646",
+    "Html": "Hi\r<br />\nThanks for the rapid answer.\r<br />\nAbout the unzip , i tryied  extractracting the downloaded  module files, also , copied the module folder from my WIN7 , where is perfectly working.\r<br />\n<br />\nthe error ocurr , when trying to load the dlls at x64 (ls $PSScriptRoot/bin/x64/*.dll | ipmo;)\r<br />\n<br />\noutput of  $psversiontable\r<br />\n<br />\nName                           Value<br />\n<hr />\nCLRVersion                     2.0.50727.5420\r<br />\nBuildVersion                   6.1.7601.17514\r<br />\nPSVersion                      2.0\r<br />\nWSManStackVersion              2.0\r<br />\nPSCompatibleVersions           {1.0, 2.0}\r<br />\nSerializationVersion           1.1.0.1\r<br />\nPSRemotingProtocolVersion      2.1\r<br />\n<br />\nAlso i ve instaled .NET 4.0.\r<br />\nthere are any prequisites?\r<br />\nthanks<br />\n",
+    "PostedDate": "2013-02-11T09:25:47.793-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

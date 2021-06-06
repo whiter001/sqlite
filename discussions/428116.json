@@ -1,0 +1,18 @@
+[
+  {
+    "Id": "981976",
+    "ThreadId": "428116",
+    "Html": "\r\n<p>Hello</p>\r\n<p>I think I am seeing some performance degradation as the number of records in a table increases.&nbsp; I'm using the following script:</p>\r\n<p></p>\r\n<div style=\"color:black; background-color:white\">\r\n<pre><span style=\"color:orangered\">$strCurrentPath</span> <span style=\"color:gray\">=</span> (Get<span style=\"color:gray\">-</span>Location).Path\r\nImport<span style=\"color:gray\">-</span>Module <span style=\"color:orangered\">$strCurrentPath</span>\\SQLite\r\n<span style=\"color:orangered\">$dbDataFile</span> <span style=\"color:gray\">=</span> <span style=\"color:#a31515\">&quot;$strCurrentPath\\testdb.sqlite&quot;</span>\r\n\r\nrm <span style=\"color:gray\">-</span>Force <span style=\"color:orangered\">$dbDataFile</span>\r\n\r\nNew<span style=\"color:gray\">-</span>PSDrive <span style=\"color:gray\">-</span>PSProvider SQLite <span style=\"color:gray\">-</span>Name filesdb <span style=\"color:gray\">-</span>Root <span style=\"color:#a31515\">&quot;Data source=$dbDataFile;Cache Size=2097152;Page Size=2097152;Synchronous=Off;&quot;</span>\r\nnew<span style=\"color:gray\">-</span>item <span style=\"color:gray\">-</span>path filesdb:<span style=\"color:gray\">/</span>Files <span style=\"color:gray\">-</span>value <span style=\"color:#a31515\">&quot;id INTEGER PRIMARY KEY, filepath TEXT NOT NULL UNIQUE, presize INTEGER, postsize INTEGER, hash TEXT&quot;</span>\r\n\r\n<span style=\"color:blue\">for</span> (<span style=\"color:orangered\">$i</span> <span style=\"color:gray\">=</span> 0; <span style=\"color:orangered\">$i</span> <span style=\"color:gray\">-lt</span> 500; <span style=\"color:orangered\">$i</span><span style=\"color:gray\">&#43;&#43;</span>) {\r\n\tWrite<span style=\"color:gray\">-</span>Host <span style=\"color:#a31515\">&quot;Record $i&quot;</span>\r\n\tmeasure<span style=\"color:gray\">-</span>command { New<span style=\"color:gray\">-</span>Item filesdb:<span style=\"color:gray\">/</span>Files <span style=\"color:gray\">-</span>filepath <span style=\"color:#a31515\">&quot;string $i&quot;</span> <span style=\"color:gray\">-</span>presize 0 <span style=\"color:gray\">-</span>postsize 0 <span style=\"color:gray\">-</span>hash <span style=\"color:#a31515\">&quot;string&quot;</span> | Out<span style=\"color:gray\">-</span>Null }\r\n}\r\n\r\nRemove<span style=\"color:gray\">-</span>PSDrive filesdb\r\n</pre>\r\n</div>\r\n<p></p>\r\n<p>&nbsp;</p>\r\n<p>On the 10th row added, the measure-command cmdlet tells me that it took 0.0343507 seconds to add.&nbsp; On the 500th row, it took 3.343963 seconds.</p>\r\n<p>This trend up generally continues in this direction with the more records I add (though I am still waiting for the 1000 record test to finish).</p>\r\n<p>Have I got something wrong with the structure of the table or the connection string?&nbsp; Or is this &quot;normal&quot; behaviour?</p>\r\n",
+    "PostedDate": "2012-12-31T09:32:45.993-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "1315816",
+    "ThreadId": "428116",
+    "Html": "Hello,<br />\ninsted if New-Item cmdlet try this<br />\n<br />\n<br />\nInvoke-Item filesdb:/Files -sql <em>sql_statement</em><br />\n<br />\nwhere as a sql statement you are putting &quot;insert into table values ....&quot;<br />\nin my table with 33000 records it working very fast<br />\n",
+    "PostedDate": "2014-10-22T14:11:07.157-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

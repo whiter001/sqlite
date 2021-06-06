@@ -1,0 +1,45 @@
+{
+  "WorkItem": {
+    "AffectedComponent": {
+      "Name": "",
+      "DisplayName": ""
+    },
+    "ClosedComment": "",
+    "ClosedDate": null,
+    "CommentCount": 1,
+    "Custom": null,
+    "Description": "Hi,\r\n\r\nI am attempting to write to a firefox sqllite database \"permissions.sqllite\". The problem is that one of the names in the database fields is \"type\". When I attempt to write to the database with this command:\r\n\r\nNew-Item firefoxdb:\\moz_hosts -host \"www.test.com\" -type \"install\"\r\n\r\nI get the following error: \"Parameter 'type' cannot be specified because it conflicts with the parameter alias of the same name for parameter 'ItemType'.\"\r\n\r\nFrom what I can tell this is a built-in powershell parameter for the -itemtype alias that I cannot change. \r\n\r\nIf anyone has a way to get around this I would appreciate it. ",
+    "LastUpdatedDate": "2017-02-14T05:25:08.127-08:00",
+    "PlannedForRelease": "",
+    "ReleaseVisibleToPublic": false,
+    "Priority": {
+      "Name": "Unassigned",
+      "Severity": 0,
+      "Id": 0
+    },
+    "ProjectName": "psqlite",
+    "ReportedDate": "2014-02-26T06:44:41.463-08:00",
+    "Status": {
+      "Name": "Proposed",
+      "Id": 1
+    },
+    "ReasonClosed": {
+      "Name": "Unassigned"
+    },
+    "Summary": "Issue with new-item command",
+    "Type": {
+      "Name": "Unassigned",
+      "Id": 5
+    },
+    "VoteCount": 2,
+    "Id": 9
+  },
+  "FileAttachments": [],
+  "Comments": [
+    {
+      "Message": "The following doesn't work either: \nNew-Item -Path firefoxdb:\\moz_hosts -Value @{host=\"www.test.com\"; type=\"install\"}\nNew-Object psobject -property @{host=\"www.test.com\"; type=\"install\"} | New-Item -Path firefoxdb:\\moz_hosts\nI would also need a solution for this.",
+      "PostedDate": "2017-02-14T05:25:08.127-08:00",
+      "Id": 206626
+    }
+  ]
+}

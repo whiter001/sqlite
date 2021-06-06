@@ -1,0 +1,18 @@
+[
+  {
+    "Id": "845774",
+    "ThreadId": "358647",
+    "Html": "\r\n<p>I want to use your module, but I'm seeing some very strange behavior. I create a table. Add some records and try to select one:</p>\r\n<p>Import-Module SQLite<br>\r\nnew-psdrive -psprovider SQLite -name sql -root &quot;Data Source=d:/work/oneplacemail.sqlite&quot;<br>\r\n# Create table<br>\r\nnew-item -path sql:/users -value &quot;id INTEGER PRIMARY KEY, uid TEXT, site TEXT, siteurl TEXT, listname TEXT, listurl TEXT, status TEXT&quot;<br>\r\n# Insert record<br>\r\nnew-item -path sql:/users -value @{ uid='rbreedlove'; site='My Site Name'; siteurl=&quot;<a href=\"http://ecurrent.oa.caiso.com/sa\">http://ecurrent.oa.caiso.com/sa</a>&quot;; listname='list a'; listurl=&quot;<a href=\"http://ecurrent.oa.caiso.com/sa/lista\">http://ecurrent.oa.caiso.com/sa/lista</a>&quot;\r\n }<br>\r\nnew-item -path sql:/users -value @{ uid='rking'; site='Your Site Name'; siteurl=&quot;<a href=\"http://ecurrent.oa.caiso.com/sb\">http://ecurrent.oa.caiso.com/sb</a>&quot;; listname='list a'; listurl=&quot;<a href=\"http://ecurrent.oa.caiso.com/sa/lista\">http://ecurrent.oa.caiso.com/sa/lista</a>&quot;\r\n }<br>\r\nnew-item -path sql:/users -value @{ uid='rkmadrigal'; site='Your Site Name'; siteurl=&quot;<a href=\"http://ecurrent.oa.caiso.com/sb\">http://ecurrent.oa.caiso.com/sb</a>&quot;; listname='list b'; listurl=&quot;<a href=\"http://ecurrent.oa.caiso.com/sa/listb\">http://ecurrent.oa.caiso.com/sa/listb</a>&quot;\r\n }<br>\r\nnew-item -path sql:/users -value @{ uid='rbreedlove'; site='Your Site Name'; siteurl=&quot;<a href=\"http://ecurrent.oa.caiso.com/sb\">http://ecurrent.oa.caiso.com/sb</a>&quot;; listname='list a'; listurl=&quot;<a href=\"http://ecurrent.oa.caiso.com/sa/lista\">http://ecurrent.oa.caiso.com/sa/lista</a>&quot;\r\n }</p>\r\n<p>$user = ls sql:/users -Filter &quot;uid='rbreedlove' and site='My Site Name'&quot;</p>\r\n<p>The retrieval fails when I use the &quot;site&quot; as the &quot;where clause&quot;. Using any other field works.</p>\r\n<p>I also can't get the output to display in &quot;format-table -autosize&quot; statements.</p>\r\n<p>Have any idea what might be going on?</p>\r\n<p>&nbsp;</p>\r\n<p>&nbsp;</p>\r\n<p><span style=\"font-family:Courier New; color:#5f9ea0; font-size:x-small\"><span style=\"font-family:Courier New; color:#5f9ea0; font-size:x-small\"><span style=\"font-family:Courier New; color:#5f9ea0; font-size:x-small\"><span style=\"font-family:Courier New; color:#5f9ea0; font-size:x-small\">&nbsp;</span></span></span></span></p>\r\n<p>&nbsp;</p>\r\n",
+    "PostedDate": "2012-06-06T15:23:14.777-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "846241",
+    "ThreadId": "358647",
+    "Html": "<p>I ran the code from your post - modifying only the sqlite database file path - with no issues on both x86 and x64 shells.</p>\r\n<p>Do you get an error, or does the search just not return any results?</p>",
+    "PostedDate": "2012-06-07T13:17:29.163-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

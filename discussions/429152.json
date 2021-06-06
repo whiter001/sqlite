@@ -1,0 +1,34 @@
+[
+  {
+    "Id": "984933",
+    "ThreadId": "429152",
+    "Html": "\r\n<p>When I create a table in one db (eg: GCA\\Us) through the command&nbsp;</p>\r\n<p>New-Item GCA:\\Us -value @{ACCOUNT=&quot;TEXT UNIQUE&quot;; NOME=&quot;TEXT NOT NULL&quot;; DISABILITATO=&quot;TEXT NOT NULL&quot;}</p>\r\n<p>automatically creates _id as INTEGER PRIMARY KEY</p>\r\n<p>I want to use ACCOUNT as primary key, but using&nbsp;</p>\r\n<p>New-Item GCA:\\Us -value @{ACCOUNT=&quot;TEXT UNIQUE PRIMARY KEY&quot; ...&nbsp;</p>\r\n<p>it replies&nbsp;</p>\r\n<p><span style=\"color:#ff0000\"><em>New-Item : SQLite errortable &quot;Us&quot; has more than one primary keyIn riga:1 car:9&#43; New-Item &lt;&lt;&lt;&lt; &nbsp;GCA:\\Us1 -value @{ACCOUNT=&quot;TEXT UNIQUE PRIMARY KEY&quot;; NOME=&quot;TEXT NOT NULL&quot;; DISABILITATO=&quot;TEXT\r\n NOT NULL&quot;}&nbsp; &nbsp; &#43; CategoryInfo &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;: NotSpecified: ([Data Source=C:\\Temp\\GCA.s3db]\\Us1:String) [New-Item], SQLiteException&nbsp; &nbsp; &#43; FullyQualifiedErrorId : NewItem.Invoke,Microsoft.PowerShell.Commands.NewItemCommand</em></span></p>\r\n<p>How I can bypass this problem?</p>\r\n<p>Thnaks<br>\r\nSergio</p>\r\n",
+    "PostedDate": "2013-01-10T05:12:28.21-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "984952",
+    "ThreadId": "429152",
+    "Html": "\r\n<p>I reply myself:</p>\r\n<p>Invoke-Item GCA:\\ -sql &quot;CREATE TABLE [Users] ([ACCOUNT] TEXT PRIMARY KEY NOT NULL UNIQUE, [DISABILITATO] TEXT NOT NULL, [NOME] TEXT NOT NULL);&quot;</p>\r\n",
+    "PostedDate": "2013-01-10T05:55:20.787-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "985517",
+    "ThreadId": "429152",
+    "Html": "\r\n<p>HA!&nbsp; I was just&nbsp; writing that same solution when I saw you beat me to it!</p>\r\n<p>At the moment the provider assumes an integer primary key; there *was* a reason for this - I think it had to do with being able to reliably reference a key when you create a new record but I'm not sure now.&nbsp; Create an issue so this doesn't get lost - I need\r\n to take another look at this and see if I can't unknot this assumption from the code.</p>\r\n",
+    "PostedDate": "2013-01-11T08:42:28.227-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "985705",
+    "ThreadId": "429152",
+    "Html": "\r\n<p>XD</p>\r\n<p>Tnx a lot!</p>\r\n<p>Sergio</p>\r\n",
+    "PostedDate": "2013-01-11T15:10:37.037-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

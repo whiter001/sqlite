@@ -1,0 +1,39 @@
+{
+  "WorkItem": {
+    "AffectedComponent": {
+      "Name": "",
+      "DisplayName": ""
+    },
+    "ClosedComment": "",
+    "ClosedDate": null,
+    "CommentCount": 0,
+    "Custom": null,
+    "Description": "When I create a table in one db (eg: GCA\\Us) through the command \r\n\r\nNew-Item GCA:\\Us -value @{ACCOUNT=\"TEXT UNIQUE\"; NOME=\"TEXT NOT NULL\"; DISABILITATO=\"TEXT NOT NULL\"}\r\n\r\nautomatically creates _id as INTEGER PRIMARY KEY\r\n\r\nI want to use ACCOUNT as primary key, but using \r\n\r\nNew-Item GCA:\\Us -value @{ACCOUNT=\"TEXT UNIQUE PRIMARY KEY\" ... \r\n\r\nit replies \r\n\r\nNew-Item : SQLite errortable \"Us\" has more than one primary keyIn riga:1 car:9+ New-Item <<<<  GCA:\\Us1 -value @{ACCOUNT=\"TEXT UNIQUE PRIMARY KEY\"; NOME=\"TEXT NOT NULL\"; DISABILITATO=\"TEXT NOT NULL\"}    + CategoryInfo          : NotSpecified: ([Data Source=C:\\Temp\\GCA.s3db]\\Us1:String) [New-Item], SQLiteException    + FullyQualifiedErrorId : NewItem.Invoke,Microsoft.PowerShell.Commands.NewItemCommand\r\n",
+    "LastUpdatedDate": "2013-01-11T14:35:25.767-08:00",
+    "PlannedForRelease": "",
+    "ReleaseVisibleToPublic": false,
+    "Priority": {
+      "Name": "Low",
+      "Severity": 50,
+      "Id": 1
+    },
+    "ProjectName": "psqlite",
+    "ReportedDate": "2013-01-11T14:35:25.767-08:00",
+    "Status": {
+      "Name": "Proposed",
+      "Id": 1
+    },
+    "ReasonClosed": {
+      "Name": "Unassigned"
+    },
+    "Summary": "Primary Key",
+    "Type": {
+      "Name": "Issue",
+      "Id": 3
+    },
+    "VoteCount": 1,
+    "Id": 8
+  },
+  "FileAttachments": [],
+  "Comments": []
+}

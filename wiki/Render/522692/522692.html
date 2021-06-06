@@ -1,0 +1,15 @@
+<div class="wikidoc"><h1>Searching and Filtering</h1>
+The SQLite provider supports native (SQLite-based) filtering through the use of the -filter parameter in various item cmdlets.  For example, this command searches a table for records with a username field value of &#39;Beefarino&#39;:<br /><br /><div style="color:Black;background-color:White;"><pre>
+PS<span style="color:Gray;">&gt;</span> get<span style="color:Gray;">-</span>childitem mydb:<span style="color:Gray;">/</span>Users <span style="color:Gray;">-</span><span style="color:Blue;">filter</span> <span style="color:#A31515;">&quot;username=&#39;Beefarino&#39;&quot;</span>
+</pre></div><br />The syntax of the filter parameter is open to the syntax supported by the <a href="http://www.sqlite.org/lang_select.html#whereclause">SQLite WHERE clause</a>.  You can create very powerful search using very little PowerShell.  This example finds all users with the letter &#39;f&#39; in their username:<br /><br /><div style="color:Black;background-color:White;"><pre>
+PS<span style="color:Gray;">&gt;</span> get<span style="color:Gray;">-</span>childitem mydb:<span style="color:Gray;">/</span>Users <span style="color:Gray;">-</span><span style="color:Blue;">filter</span> <span style="color:#A31515;">&quot;username like &#39;%f%&#39;&quot;</span>
+</pre></div><br />The -filter parameter is supported on these SQLite provider cmdlets:
+<ul><li>get-childItem</li>
+<li>get-item</li>
+<li>set-item</li>
+<li>remove-item</li></ul>
+<br />This example updates the Status field for all records where the username starts with &#39;Beef&#39;:<br /><br /><div style="color:Black;background-color:White;"><pre>
+PS<span style="color:Gray;">&gt;</span> set<span style="color:Gray;">-</span>item mydb:<span style="color:Gray;">/</span>Users <span style="color:Gray;">-</span><span style="color:Blue;">filter</span> <span style="color:#A31515;">&quot;username like &#39;beef%&#39;&quot;</span> <span style="color:Gray;">-</span>value @{ status<span style="color:Gray;">=</span>0 }
+</pre></div><br /><br />This example removes all database table records with a Status field equal to 0:<br /><br /><div style="color:Black;background-color:White;"><pre>
+PS<span style="color:Gray;">&gt;</span> remove<span style="color:Gray;">-</span>item mydb:<span style="color:Gray;">/</span>Users <span style="color:Gray;">-</span><span style="color:Blue;">filter</span> <span style="color:#A31515;">&quot;status = 0&quot;</span>
+</pre></div></div><div class="ClearBoth"></div>

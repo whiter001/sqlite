@@ -1,0 +1,10 @@
+[
+  {
+    "Id": "1065630",
+    "ThreadId": "449315",
+    "Html": "Hello,\r<br />\n<br />\nI try to load a DB with SQLite Provider with filtered events (from the event log), the code looks like :\r<br />\n<br />\nGet-eventLog | [SomeFiltering] |% { add-member -Passthru } |% { $_ | new-item mydb:/MyTable }\r<br />\n<br />\nPsh can not bind parameters to new item due to missing mandatory parameter &quot;NAme&quot; which did not exist in the table nor in the added property. I assume that the Module doesn't know how to &quot;manage&quot; PSCustomObject ?\r<br />\n<br />\nAnother point is that the more rows are inserted the slower it goes. For example, the first scan generate around 2300 rows, it takes 1 minute to insert the first 100 rows, and almost 30minutes to insert the first 1200 rows. The entire operation will last almost 1hour :/ Is there a workaround ?\r<br />\n<br />\nRegards,\r<br />\nKarrakis<br />\n",
+    "PostedDate": "2013-07-08T08:50:49.167-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]
